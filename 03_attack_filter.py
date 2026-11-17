@@ -14,6 +14,15 @@ import os
 import pandas as pd
 import time
 seconds = time.time()
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(script_dir, "all_data.csv")
+attack_dir = os.path.join(script_dir, "attacks")
+
+if not os.path.isfile(data_path):
+    raise FileNotFoundError(
+        "Required input file not found: {}. Run 01_preprocessing.py first "
+        "to generate it from the dataset CSVs in the CSVs folder.".format(data_path)
+    )
 
 
 def folder(f_name): #this function creates a folder named "attacks" in the program directory.
@@ -45,7 +54,7 @@ main_labels=["Flow ID","Source IP","Source Port","Destination IP","Destination P
 main_labels=( ",".join( i for i in main_labels ) )
 
 attacks=["BENIGN", "Bot", "DDoS", "DoS GoldenEye", "DoS Hulk", "DoS Slowhttptest", "DoS slowloris", "FTP-Patator", "Heartbleed", "Infiltration", "PortScan", "SSH-Patator", "Web Attack – Brute Force", "Web Attack – Sql Injection", "Web Attack – XSS"]
-folder("./attacks/")
+folder(attack_dir)
 
 benign=2359289
 
@@ -69,10 +78,10 @@ dict_attack={
 
 for i in dict_attack: # in this section, a file is opened for each attack type and is recorded at a random benign flow.
     a,b=0,0
-    ths = open(".\\attacks\\"+i + ".csv", "w")
+    ths = open(os.path.join(attack_dir, i + ".csv"), "w")
     ths.write(str(main_labels)+"\n")
     benign_num=int(benign/(dict_attack[i]*(7/3)))
-    with open("all_data.csv", "r") as file:
+    with open(data_path, "r") as file:
         while True:
             try:
                 line=file.readline()
@@ -98,13 +107,14 @@ for i in dict_attack: # in this section, a file is opened for each attack type a
 webs=["Web Attack - Brute Force","Web Attack - XSS","Web Attack - Sql Injection"]
 flag=True
 for i in webs:
-    df=pd.read_csv(".\\attacks\\"+str(i)+".csv")
+    attack_file = os.path.join(attack_dir, str(i) + ".csv")
+    df=pd.read_csv(attack_file)
     if flag:
-        df.to_csv('.\\attacks\\Web Attack.csv' ,index = False)
+        df.to_csv(os.path.join(attack_dir, "Web Attack.csv"), index = False)
         flag=False
     else:
-        df.to_csv('.\\attacks\\Web Attack.csv' ,index = False,header=False,mode="a")
-    os.remove(".\\attacks\\"+str(i)+".csv")
+        df.to_csv(os.path.join(attack_dir, "Web Attack.csv"), index = False,header=False,mode="a")
+    os.remove(attack_file)
 
 
 

@@ -1,9 +1,28 @@
-# Anomaly-Detection-in-Network-Traffic-Using-Machine-Learning
+# Anomaly Detection in Network Traffic Using Machine Learning
 
-###### This file gives information on how to use the implementation files of "Anomaly Detection in Network Traffic Using Machine Learning" 
+This project processes the CICIDS2017 network-flow dataset and compares machine-learning classifiers for distinguishing benign traffic from attacks. It includes Python scripts and Jupyter notebooks for each stage of the workflow.
 
+## Requirements and input data
 
-Python 3.6 was used to create the application files. Before running the files, it must be ensured that [Python 3.6](https://www.python.org/downloads/) and the following libraries are installed.
+The scripts were originally developed with Python 3.6. They use NumPy, pandas, scikit-learn, and Matplotlib; Jupyter is needed to run the notebooks. The project does not pin dependency versions, so use versions compatible with your Python installation.
+
+Download the [CICIDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html) separately. Place its eight CSV files in a `CSVs/` directory next to these scripts. Dataset files and generated intermediate data are not included in this repository.
+
+## Workflow
+
+Run the numbered scripts from this directory, in order:
+
+1. `01_preprocessing.py` — clean and combine the source CSVs into `all_data.csv`.
+2. `02_statistics.py` — summarize the processed data.
+3. `03_attack_filter.py` — split attack traffic into files under `attacks/`.
+4. `04_1_feature_selection_for_attack_files.py` and `04_2_feature_selection_for_all_data.py` — calculate feature importance.
+5. The `05_*.py` scripts — train and compare classifiers, and write result tables and plots.
+
+The later stages depend on files generated earlier. Processing and model comparisons may take substantial time and memory, depending on the dataset and computer. Equivalent `.ipynb` notebooks are provided for interactive use.
+
+## Original environment
+
+The original scripts were developed with Python 3.6. Before running them, install compatible versions of the following libraries:
 
 | Library | Task |
 | ------ | ------ |
@@ -13,7 +32,7 @@ Python 3.6 was used to create the application files. Before running the files, i
 | [ Matplotlib ](https://matplotlib.org/users/installing.html) |Graphics and Visuality|
 
 
- 
+
 
 The implementation phase consists of 5 steps, which are:
 1-	Pre-processing
@@ -102,7 +121,7 @@ The last run time of this file was recorded as 3601 seconds.
 
 
 
-This program implements machine learning methods in the file "all_data.csv". Uses the features used in the previous step. The set of features to be used consists of combining the 4 features with the highest importance-weight achieved for each attack in "machine_learning_implementation_for_attack_files"  step under a single roof. Thus, 4 features are obtained from each of the 12 attack types, resulting in a pool of features consisting of 48 attributes. After the repetitions are removed, the number of features is 18. 
+This program implements machine learning methods in the file "all_data.csv". Uses the features used in the previous step. The set of features to be used consists of combining the 4 features with the highest importance-weight achieved for each attack in "machine_learning_implementation_for_attack_files"  step under a single roof. Thus, 4 features are obtained from each of the 12 attack types, resulting in a pool of features consisting of 48 attributes. After the repetitions are removed, the number of features is 18.
 
 This file applies 7 machine learning algorithms to "all_data.csv" file 10 times and prints the results of these operations on the screen and in the file "./attacks/results_2.csv". It also creates box and whisker graphics of the results and prints them both on the screen and in the "./attacks/result_graph_2/" folder.
 
@@ -114,7 +133,7 @@ The last run time of this file was recorded as 25082 seconds.
 
 
 
-This program implements machine learning methods in the file "all_data.csv". The features used are the 7 features with the highest weight, produced by the feature_selection_for_all_data file. 
+This program implements machine learning methods in the file "all_data.csv". The features used are the 7 features with the highest weight, produced by the feature_selection_for_all_data file.
 This file applies 7 machine learning algorithms to "all_data.csv" file 10 times and prints the results of these operations on the screen and in the file "./attacks/results_3.csv". It also creates box and whisker graphics of the results and prints them both on the screen and in the "./attacks/result_graph_3/" folder.
 
 The last run time of this file was recorded as 12714 seconds.
@@ -145,19 +164,18 @@ The last run time of this file was recorded as 18561 seconds
 #
  ╰┈➤Getting Started With Enterprise-Grade AI:
  https://www.credly.com/badges/34b6670e-ec78-4c65-b69e-04f2472e55ca/public_url
- 
+
  ╰┈➤Journey To Cloud: Envisioning Your Solution:
  https://www.credly.com/badges/ade5b5d2-6493-469b-89d4-0e0acf486de0/public_url
- 
+
  ╰┈➤Getting Started With Enterprise Data Science:
  https://www.credly.com/badges/5d2beca3-4a74-4fdc-80e5-2241194c5589/public_url
- 
+
  ╰┈➤Deep Learning Fundamentals:
  https://www.credly.com/badges/0866d836-af76-434b-a066-7ee5155773b7/public_url
- 
+
  ╰┈➤Getting Started with Threat Intelligence and Hunting:
  https://www.credly.com/badges/124a13c2-c1c9-47c5-9726-94f201dc40c5/public_url
- 
+
  ╰┈➤Machine Learning with Python:
  https://www.credly.com/badges/e03ec15b-ddf6-457e-8473-0acfb3a49af3/public_url
-

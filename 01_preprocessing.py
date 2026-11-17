@@ -25,7 +25,6 @@ import os
 from sklearn import preprocessing
 import time
 seconds = time.time()
-get_ipython().run_line_magic('matplotlib', 'inline')
 
 print("This process may take 5 to 10 minutes, depending on the performance of your computer.\n\n\n")
 number="0123456789"
@@ -134,6 +133,5 @@ print("Total operation time: = ",time.time()- seconds ,"seconds")
 
 
 # In[ ]:
-
 
 
